@@ -1,6 +1,21 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { ActiveProjectApi, createProjectApi, deleteProjectApi, getInputProjectApi, getProjectApi, getUserNotPaggingApi, InactiveProjectApi } from "../../api/project";
-import { IActiveProjectReq, ICreateProject, ICreateProjectRes, IGetProjectReq, IProjectSearch } from "../../interfaces/project/projectType";
+import {
+  ActiveProjectApi,
+  createProjectApi,
+  deleteProjectApi,
+  getInputProjectApi,
+  getLookUpRoomApi,
+  getProjectApi,
+  getUserNotPaggingApi,
+  InactiveProjectApi,
+} from "../../api/project";
+import {
+  IActiveProjectReq,
+  ICreateProject,
+  ICreateProjectRes,
+  IGetProjectReq,
+  IProjectSearch,
+} from "../../interfaces/project/projectType";
 
 export const getProject = createAsyncThunk(
   "/Project/GetAll",
@@ -23,13 +38,12 @@ export const createProject = createAsyncThunk(
   async ({
     id,
     name,
-    code,
+    properties,
     status,
     timeStart,
     timeEnd,
     note,
     projectType,
-    customerId,
     tasks,
     users,
     projectTargetUsers,
@@ -38,13 +52,12 @@ export const createProject = createAsyncThunk(
     const response = await createProjectApi({
       id,
       name,
-      code,
+      properties,
       status,
       timeStart,
       timeEnd,
       note,
       projectType,
-      customerId,
       tasks,
       users,
       projectTargetUsers,
@@ -55,14 +68,16 @@ export const createProject = createAsyncThunk(
 );
 
 export const activeProject = createAsyncThunk(
-  "/Project/Active", async ({ id }: IActiveProjectReq) => {
+  "/Project/Active",
+  async ({ id }: IActiveProjectReq) => {
     const response = { ...(await ActiveProjectApi({ id })), id };
     return response;
   }
 );
 
 export const inactiveProject = createAsyncThunk(
-  "/Project/Inactive", async ({ id }: IActiveProjectReq) => {
+  "/Project/Inactive",
+  async ({ id }: IActiveProjectReq) => {
     const response = { ...(await InactiveProjectApi({ id })), id };
     return response;
   }
@@ -77,9 +92,17 @@ export const deleteProject = createAsyncThunk(
 );
 
 export const getUserNotPagging = createAsyncThunk(
-    "/User/GetUserNotPagging",
-    async () => {
-      const response = await getUserNotPaggingApi();
-      return response;
-    }
-  );
+  "/User/GetUserNotPagging",
+  async () => {
+    const response = await getUserNotPaggingApi();
+    return response;
+  }
+);
+
+export const getLookUpRoom = createAsyncThunk(
+  "/Project/getUserByProject",
+  async (name_room: string) => {
+    const response = { ...(await getLookUpRoomApi(name_room)) };
+    return { ...response, name_room };
+  }
+);

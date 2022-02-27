@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Button, MenuItem, Modal } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteProject } from "../../../../redux/actions/project";
-import { RootState } from "../../../../redux/store";
+import { deleteProject } from "../../../../../redux/actions/project";
+import { RootState } from "../../../../../redux/store";
 import { Box } from "@mui/system";
 import styled from "styled-components";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { SnackbarProvider, VariantType, useSnackbar } from "notistack";
-import { resetProgress } from "../../../../redux/reducer/projectReducer";
-import { IProjectReq } from "../../../../interfaces/project/projectType";
+import { resetProgress } from "../../../../../redux/reducer/projectReducer";
+import { IProjectReq } from "../../../../../interfaces/project/projectType";
 
 const style = {
   position: "absolute" as "absolute",
@@ -65,8 +65,8 @@ const ActionDelete: React.FC<{ project: IProjectReq }> = ({ project }) => {
     dispatch(deleteProject(id));
     enqueueSnackbar(
       error === null
-        ? "Delete project success"
-        : "MyTimesheet is exist, you cann't delete Project",
+        ? "Ngưng hoạt động phòng thành công"
+        : "Không thể bỏ",
       {
         variant,
       }
@@ -76,7 +76,7 @@ const ActionDelete: React.FC<{ project: IProjectReq }> = ({ project }) => {
     <>
       <MenuItem disableRipple onClick={handleOpen}>
         <DeleteIcon />
-        <p style={{ color: "red" }}>Delete</p>
+        <p style={{ color: "red" }}>Xoá</p>
       </MenuItem>
       <Modal
         open={open}
@@ -88,7 +88,7 @@ const ActionDelete: React.FC<{ project: IProjectReq }> = ({ project }) => {
             <ErrorOutlineIcon sx={{ color: "#f8bb86", fontSize: "100px" }} />
             <TextTitle>Bạn có chắc không?</TextTitle>
             <TextDescription>
-              Delete project : '{project.name}' ?
+              Xoá người dùng : '{project.name}' ?
             </TextDescription>
             <StyleButton>
               <Button

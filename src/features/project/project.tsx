@@ -9,7 +9,8 @@ import FormControl from "@mui/material/FormControl";
 import { getProject } from "../../redux/actions/project";
 import { projectSelector } from "../../redux/reducer/projectReducer";
 // import CreateProjects from "./component/createProject/createProject";
-import ListProjects from "./component/listProject";
+import ListProjects from "./component/listProject/listProject";
+import CreateProjects from "./component/createProject/createProject";
 
 const ProjectContent = styled.div`
   width: 100%;
@@ -28,6 +29,7 @@ const TitleHeader = styled.div`
 
 const AddContent = styled.div`
   display: flex;
+ 
   justify-content: space-between;
   padding: 15px;
   align-items: center;
@@ -73,7 +75,7 @@ const Projects: React.FC = () => {
       </HeaderProject>
       <hr />
       <AddContent>
-        {/* <CreateProjects /> */}
+        <CreateProjects />
         <FormControl sx={{ width: "230px", left: "50px" }}>
           <Select
             labelId="demo-simple-select-label"

@@ -9,6 +9,8 @@ import Users from "../../features/user/user";
 import Roles from "../../features/role/role";
 import Tasks from "../../features/task/task";
 import Projects from "../../features/project/project";
+import Lookup from "../../features/lookup/lookup";
+import Home from "../../features/home/home";
 // import Tracker from "../../tracker/Tracker";
 
 const MainContent = styled.div`
@@ -33,26 +35,26 @@ interface data {
 }
 
 const MainView: React.FC = () => {
-  const [countries, setCountries] = React.useState<data[]>([]);
+  // const [countries, setCountries] = React.useState<data[]>([]);
   const { path } = useRouteMatch();
-  useEffect(() => {
-    axios
-      .get("https://api.covid19api.com/countries")
-      .then((response) => {
-        // handle success
-        console.log(response);
-        const { data } = response;
-            console.log(data);
+  // useEffect(() => {
+  //   axios
+  //     .get("https://api.covid19api.com/countries")
+  //     .then((response) => {
+  //       // handle success
+  //       console.log(response);
+  //       const { data } = response;
+  //           console.log(data);
       
-            const countries:any[] = sortBy(data, "Country");
-            setCountries(countries);
-            // setSelectedCountryId("vn")
-      })
-      .catch((error) => {
-        // handle error
-        console.log(error);
-      });
-  },[]);
+  //           const countries:any[] = sortBy(data, "Country");
+  //           setCountries(countries);
+  //           // setSelectedCountryId("vn")
+  //     })
+  //     .catch((error) => {
+  //       // handle error
+  //       console.log(error);
+  //     });
+  // },[]);
   return (
     <MainContent>
       <Content>
@@ -66,7 +68,7 @@ const MainView: React.FC = () => {
           <PrivateRoute
             exact={false}
             path={`${path}/home`}
-            component={Header}
+            component={Home}
           />
           <PrivateRoute
             exact={false}
@@ -82,6 +84,11 @@ const MainView: React.FC = () => {
             exact={false}
             path={`${path}/main/project`}
             component={Projects}
+          />
+          <PrivateRoute
+            exact={false}
+            path={`${path}/main/search`}
+            component={Lookup}
           />
         </Switch>
       </Content>

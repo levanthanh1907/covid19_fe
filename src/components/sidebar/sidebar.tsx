@@ -21,6 +21,7 @@ import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import logo from "../../asset/img/doctor.jpg";
 import { useDispatch } from "react-redux";
 import { removeAccessToken } from "../../utils/localStorageService";
+import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 
 const SidebarContainer = styled.div`
   width: 350px;
@@ -208,6 +209,14 @@ const SideBar = () => {
               <AssessmentIcon />
             </ListItemIcon>
             <ListItemText primary="Phòng điều trị" />
+          </ListItemButton>
+        </StyleLink>
+        <StyleLink to="/app/main/search">
+          <ListItemButton>
+            <ListItemIcon>
+              <ManageSearchIcon />
+            </ListItemIcon>
+            <ListItemText primary="Tra cứu thông tin" />
           </ListItemButton>
         </StyleLink>
       </List>

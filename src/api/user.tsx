@@ -79,3 +79,11 @@ export const updateUserApi = async ({
   );
   return update;
 };
+export const createUploadFileApi = async (file: any) => {
+  const data = await postApi(`/uploadFile`, file, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return data;
+};

@@ -5,6 +5,7 @@ import { UseFormRegister, UseFormSetValue } from "react-hook-form";
 import { INewUser } from "../createUser";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import UploadButtons from "./uploadButtons";
 
 const NewTask = styled.div`
   display: flex;
@@ -83,7 +84,7 @@ const TabUser: React.FC<useForm> = ({ register, setValue }) => {
               "& input": { padding: "10px" },
             }}
           />
-          <TextField
+          {/* <TextField
             hiddenLabel
             id="standard-basic"
             variant="standard"
@@ -94,8 +95,9 @@ const TabUser: React.FC<useForm> = ({ register, setValue }) => {
               width: "100%",
               marginBottom: "20px",
               "& input": { padding: "10px" },
-            }}
-          />
+            }} */}
+          {/* ></TextField> */}
+          <UploadButtons/>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"

@@ -122,8 +122,8 @@ const EditTasks: React.FC<{ task: ITaskReq }> = ({ task }) => {
               name="type"
               render={({ field }) => (
                 <NativeSelect {...field} style={{ width: "100%" }}>
-                  <option value={0}>Công việc khi cách ly tại nhà</option>
-                  <option value={1}>Công việc khi cách ly tập trung</option>
+                  <option value={0}>Công việc phải làm</option>
+                  <option value={1}>Công việc cho từng đối tượng</option>
                 </NativeSelect>
               )}
               control={control}

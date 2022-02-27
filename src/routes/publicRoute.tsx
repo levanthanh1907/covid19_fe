@@ -11,7 +11,7 @@ const PublicRoute: React.FC<{
   return !accessToken ? (
     <Route path={props.path} component={props.component} exact={props.exact} />
   ) : (
-    <Redirect to="/app" />
+    <Redirect to="/app/home" />
   );
 };
 

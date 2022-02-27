@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 
 import Actions from "./actions";
 import dayjs from "dayjs";
-import { RootState } from "../../../redux/store";
+import { RootState } from "../../../../redux/store";
 
 const ContentTable = styled.div`
   padding: 10px 25px;
@@ -131,7 +131,7 @@ const ListProjects: React.FC = () => {
                       >
                         <ItemName>{item.name}</ItemName>
                         <ListItemOne>{item.pms}</ListItemOne>
-                        <ListItemTwo>{item.activeMember} members</ListItemTwo>
+                        <ListItemTwo>{item.activeMember} bệnh nhân</ListItemTwo>
                         {item.projectType == 0 ? (
                           <ListItemThree>Có hỗ trợ</ListItemThree>
                         ) : (
@@ -166,11 +166,11 @@ const ListProjects: React.FC = () => {
                         <div style={{display: "flex", justifyContent: "flex-end"}}>
                         {item.status === 1 ? (
                           <StyleInactive>
-                            <p>Inactive</p>
+                            <p>Không hoạt động</p>
                           </StyleInactive>
                         ) : (
                           <StyleActive>
-                            <p>Active</p>
+                            <p>Chọn</p>
                           </StyleActive>
                         )}
                         <Actions project={item} />

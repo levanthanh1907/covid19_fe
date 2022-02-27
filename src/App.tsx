@@ -4,6 +4,7 @@ import React, { Suspense, useLayoutEffect } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import HomePage from "./components";
 import Header from "./components/header/header";
+import Home from "./features/home/home";
 import Login from "./features/login/login";
 import PrivateRoute from "./routes/privateRoute";
 import PublicRoute from "./routes/publicRoute";
@@ -22,7 +23,7 @@ function App() {
                 exact={false}
                 component={Login}
               />
-              <Route path="*" component={Header} />
+              <Route path="*" component={Home} />
             </Switch>
           </BrowserRouter>
         </Suspense>

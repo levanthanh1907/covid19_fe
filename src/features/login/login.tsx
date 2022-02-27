@@ -217,7 +217,7 @@ const Login: React.FC = () => {
             Login
           </ButtonLogin>
         </FormLogin>
-        <Footer>@2021 Đây là bản quyền của Thành</Footer>
+        <Footer>@2022 Hệ thống quản lý người cách ly và người bệnh COVID-19</Footer>
       </MyTimesheet>
     </LoginTimesheet>
   );

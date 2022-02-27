@@ -23,6 +23,7 @@ import {
   resetUserProgress,
 } from "../../../redux/reducer/userReducer";
 import { getAllRoleActions } from "../../../redux/actions/role";
+import { uploadFileAction } from "../../../redux/actions/uploadFileAction";
 
 const TitleHeader = styled.div`
   font-size: 22px;
@@ -112,12 +113,29 @@ export interface INewUser {
 }
 
 const CreateUser: React.FC = () => {
+  const [fileSelected, setFileSelected] = React.useState<FileList | null>();
+  const handleUploadFile = () => {
+    if (fileSelected) {
+      let file = fileSelected[0];
+      let formData = new FormData();
+      formData.append("File", file);
+      dispatch(uploadFileAction(formData));
+    }
+  };
   const { reset, control, handleSubmit, register, setValue } =
     useForm<INewUser>();
   const dispatch = useDispatch();
   const progress = useSelector((state: RootState) => state.user.progress);
   const message = useSelector((state: RootState) => state.user.error.message);
   const handleCreate = (props: ICreateUserReq) => {
+    // if (fileSelected) {
+    //   let file = fileSelected[0];
+    //   let formData = new FormData();
+    //   formData.append("File", file);
+    //   dispatch(createUserActions(formData));
+    // }
+    // console.log(formData),
+    // console.log('hihi'),
     dispatch(
       createUserActions({
         userName: props.userName,
@@ -190,7 +208,7 @@ const CreateUser: React.FC = () => {
         >
           <form onSubmit={handleSubmit(handleCreate)}>
             <Header>
-              <TitleHeader>Create User</TitleHeader>
+              <TitleHeader>Tạo người dùng</TitleHeader>
               <CloseIcon onClick={handleClose} />
             </Header>
             <hr />
@@ -202,12 +220,12 @@ const CreateUser: React.FC = () => {
                   aria-label="basic tabs example"
                 >
                   <Tab
-                    label="User"
+                    label="Người dùng"
                     {...a11yProps(0)}
                     sx={{ textTransform: "capitalize" }}
                   />
                   <Tab
-                    label="Role"
+                    label="Vai trò"
                     {...a11yProps(1)}
                     sx={{ textTransform: "capitalize" }}
                   />
@@ -232,6 +250,7 @@ const CreateUser: React.FC = () => {
                 Huỷ bỏ
               </Button>
               <Button
+                onClick={() => handleUploadFile()}
                 type="submit"
                 variant="contained"
                 color="error"

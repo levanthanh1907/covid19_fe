@@ -70,9 +70,9 @@ const CommonTask: React.FC = () => {
 
   return (
     <Common>
-      <Title>Công việc khi cách ly tại nhà ({commonTasks.length})</Title>
+      <Title>Công việc cần thực hiện ({commonTasks.length})</Title>
       <TitleContent>
-        Các công việc này được tự động thêm vào tất cả các dự án mới
+        Các công việc này được tự động thêm vào các việc phải làm ở các phòng bệnh
       </TitleContent>
       <hr />
       <TableCommon>

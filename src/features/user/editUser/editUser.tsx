@@ -16,7 +16,10 @@ import { MenuItem } from "@mui/material";
 import { TabContext, TabList } from "@mui/lab";
 import TabEditRole from "./tabEditRole/tabEditRole";
 import { TabEditUser } from "./tabEditUser/tabEditUser";
-import { resetUpdateProgress, resetUserProgress } from "../../../redux/reducer/userReducer";
+import {
+  resetUpdateProgress,
+  resetUserProgress,
+} from "../../../redux/reducer/userReducer";
 
 const TitleHeader = styled.div`
   font-size: 22px;
@@ -97,7 +100,9 @@ const EditUser: React.FC<{ user: IGetAllReq }> = ({ user }) => {
       phoneNumber: user.phoneNumber,
       roleNames: user.roleNames,
       avatarPath: user.avatarPath,
-      TreatmentHospital: user.TreatmentHospital.toString(),
+      TreatmentHospital: user.TreatmentHospital
+        ? user.TreatmentHospital.toString()
+        : "0",
       sex: user.sex.toString(),
     },
   });

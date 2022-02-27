@@ -1,10 +1,21 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import { createSelector } from "reselect";
-import { ICreateProject, IProjectReq } from "../../interfaces/project/projectType";
+import {
+  ICreateProject,
+  IProjectReq,
+} from "../../interfaces/project/projectType";
 import { IError } from "../../interfaces/auth/authType";
 import { ITaskReq } from "../../interfaces/task/taskType";
-import { activeProject, createProject, deleteProject, getProject, getUserNotPagging, inactiveProject } from "../actions/project";
+import {
+  activeProject,
+  createProject,
+  deleteProject,
+  getLookUpRoom,
+  getProject,
+  getUserNotPagging,
+  inactiveProject,
+} from "../actions/project";
 import { getTask } from "../actions/task";
 import { IUserNotPagging } from "../../interfaces/user/userType";
 
@@ -22,6 +33,8 @@ export interface ProjectState {
   viewTask: ITaskReq[];
   selectedTasks: ITaskReq[];
   project: ICreateProject;
+  rooms: IUserNotPagging[];
+  roomId: string;
 }
 
 const initialState: ProjectState = {
@@ -38,13 +51,12 @@ const initialState: ProjectState = {
   selectedTasks: [],
   project: {
     name: "",
-    code: "",
+    properties: "",
     status: 0,
     timeStart: "",
     timeEnd: "",
     note: "",
     projectType: 0,
-    customerId: 0,
     tasks: [
       {
         taskId: 0,
@@ -69,6 +81,8 @@ const initialState: ProjectState = {
     isAllUserBelongTo: false,
     id: 0,
   },
+  rooms: [],
+  roomId: "",
   error: {
     code: 0,
     details: "",
@@ -89,6 +103,14 @@ const projectSlice = createSlice({
     },
     resetMessage(state) {
       state.error.message = "";
+    },
+    filter: (state, action) => {
+      state.filteredUsers = state.users.filter(
+        (user) =>
+          (action.payload.branch === "All" ||
+            user.TreatmentHospital === action.payload.TreatmentHospital) &&
+          (action.payload.type === "All" || user.type === action.payload.type)
+      );
     },
     pushTask: (state, action: PayloadAction<ITaskReq>) => {
       state.selectedTasks.push(action.payload);
@@ -150,6 +172,9 @@ const projectSlice = createSlice({
       .addCase(getUserNotPagging.fulfilled, (state, action) => {
         state.users = action.payload.result;
         state.filteredUsers = action.payload.result;
+      })
+      .addCase(getUserNotPagging.rejected, (state, action) => {
+        state.progress = "error";
       });
     builder
       .addCase(createProject.pending, (state, action) => {
@@ -174,9 +199,8 @@ const projectSlice = createSlice({
       if (findProject) {
         state.createProjects = state.createProjects.map((project) => {
           if (project.id === action.payload.result.id) {
-            project.customerId = action.payload.result.customerId;
             project.name = action.payload.result.name;
-            project.code = action.payload.result.code;
+            project.properties = action.payload.result.properties;
             project.timeStart = action.payload.result.timeStart;
             project.timeEnd = action.payload.result.timeEnd;
             project.note = action.payload.result.note;
@@ -242,18 +266,34 @@ const projectSlice = createSlice({
           state.error.message = action.payload.error.message;
         }
       });
+    builder
+      .addCase(getLookUpRoom.pending, (state, action) => {
+        state.progress = "pending";
+      })
+      .addCase(getLookUpRoom.fulfilled, (state, action) => {
+        state.progress = "done";
+        state.rooms = action.payload.result;
+        state.roomId = action.payload.name_room;
+        console.log(action.payload.name_room);
+      })
+      .addCase(getLookUpRoom.rejected, (state) => {
+        state.progress = "error";
+      });
   },
 });
 
 const selectSelf = (state: RootState) => state.project;
-const getAllProjectSelector = createSelector(selectSelf, (state) => state.projects);
+const getAllProjectSelector = createSelector(
+  selectSelf,
+  (state) => state.projects
+);
 const getAllProjectStatus0 = createSelector(getAllProjectSelector, (projects) =>
   projects.filter((projects) => projects.status === 0)
-  );
-  const getAllProjectStatus1 = createSelector(getAllProjectSelector, (projects) =>
+);
+const getAllProjectStatus1 = createSelector(getAllProjectSelector, (projects) =>
   projects.filter((projects) => projects.status === 1)
-  );
-  console.log(getAllProjectStatus0)
+);
+console.log(getAllProjectStatus0);
 
 export const projectSelector = {
   getAllProjectSelector,
@@ -265,6 +305,7 @@ export const {
   resetProgress,
   resetSuccess,
   resetMessage,
+  filter,
   pushTask,
   removeTask,
   updateMemberType,

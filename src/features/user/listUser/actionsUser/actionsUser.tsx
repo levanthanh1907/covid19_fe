@@ -105,11 +105,11 @@ const ActionsUser: React.FC<{ user: IGetAllReq }> = ({ user }) => {
         <DeleteUser user={user} />
         <MenuItem onClick={handleClose} disableRipple>
           <LockIcon />
-          Reset Password
+          Đặt lại mật khẩu
         </MenuItem>
         <MenuItem onClick={handleClose} disableRipple>
           <CloudUploadIcon />
-          Upload Avatar
+          Tải ảnh đại diện
         </MenuItem>
       </StyledMenu>
     </div>

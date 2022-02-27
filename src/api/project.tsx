@@ -1,4 +1,12 @@
-import { IActiveProjectReq, ICreateProject, ICreateProjectRes, IDeleteProjectRes, IGetProjectReq, IProjectRes, IProjectSearch } from "../interfaces/project/projectType";
+import {
+  IActiveProjectReq,
+  ICreateProject,
+  ICreateProjectRes,
+  IDeleteProjectRes,
+  IGetProjectReq,
+  IProjectRes,
+  IProjectSearch,
+} from "../interfaces/project/projectType";
 import { IUserNotPaggingRes } from "../interfaces/user/userType";
 import { deleteApi, getApi, postApi } from "../utils/apiHelper";
 
@@ -12,13 +20,12 @@ export const getProjectApi = async ({ status, search }: IProjectSearch) => {
 export const createProjectApi = async ({
   id,
   name,
-  code,
+  properties,
   status,
   timeStart,
   timeEnd,
   note,
   projectType,
-  customerId,
   tasks,
   users,
   projectTargetUsers,
@@ -29,13 +36,12 @@ export const createProjectApi = async ({
     {
       id,
       name,
-      code,
+      properties,
       status,
       timeStart,
       timeEnd,
       note,
       projectType,
-      customerId,
       tasks,
       users,
       projectTargetUsers,
@@ -47,7 +53,7 @@ export const createProjectApi = async ({
 
 export const ActiveProjectApi = async ({ id }: IActiveProjectReq) => {
   const data = await postApi<IActiveProjectReq, IDeleteProjectRes>(
-    `/Project/Active?Id=${id}`,
+    `/Project/Active?id=${id}`,
     {
       id,
     }
@@ -57,7 +63,7 @@ export const ActiveProjectApi = async ({ id }: IActiveProjectReq) => {
 
 export const InactiveProjectApi = async ({ id }: IActiveProjectReq) => {
   const data = await postApi<IActiveProjectReq, IDeleteProjectRes>(
-    `/Project/Inactive?Id=${id}`,
+    `/Project/Inactive?id=${id}`,
     {
       id,
     }
@@ -67,7 +73,7 @@ export const InactiveProjectApi = async ({ id }: IActiveProjectReq) => {
 
 export const deleteProjectApi = async (id: number) => {
   let url = `/Project/Delete?`;
-  if (typeof id === "number") url += `Id=${id}`;
+  if (typeof id === "number") url += `id=${id}`;
   const data = await deleteApi<IDeleteProjectRes>(url);
   return data;
 };
@@ -80,9 +86,11 @@ export const getInputProjectApi = async ({ input }: IGetProjectReq) => {
 };
 
 export const getUserNotPaggingApi = async () => {
-    const res = await getApi<IUserNotPaggingRes>(
-      `/User/GetUserNotPagging`
-    );
-    return res;
-  };
-  
+  const res = await getApi<IUserNotPaggingRes>(`/User/GetUserNotPagging`);
+  return res;
+};
+
+export const getLookUpRoomApi = async (name_room : string) => {
+  const res = await getApi<IUserNotPaggingRes>(`/Project/getUserByProject/${name_room}`);
+  return res;
+};

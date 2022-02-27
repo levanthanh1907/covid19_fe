@@ -6,10 +6,10 @@ import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 // import EditProject from "../editProject/editProject";
-import { getInputProject, getUserNotPagging } from "../../../redux/actions/project";
+import { getInputProject, getUserNotPagging } from "../../../../redux/actions/project";
 import { useDispatch } from "react-redux";
-import { getTask } from "../../../redux/actions/task";
-import { IProjectReq } from "../../../interfaces/project/projectType";
+import { getTask } from "../../../../redux/actions/task";
+import { IProjectReq } from "../../../../interfaces/project/projectType";
 import ActiveAndInactive from "./actions/actionActive";
 import DeleteProject from "./actions/actionDelete";
 
@@ -95,7 +95,7 @@ const Actions: React.FC<{ project: IProjectReq }> = ({ project }) => {
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}
       >
-        Actions
+        Tuỳ chọn
       </ButtonActions>
       <StyledMenu
         id="demo-customized-menu"
@@ -109,7 +109,7 @@ const Actions: React.FC<{ project: IProjectReq }> = ({ project }) => {
         {/* <EditProject project={project} /> */}
         <MenuItem onClick={handleClose} disableRipple>
           <VisibilityIcon />
-          View
+          Xem
         </MenuItem>
         <ActiveAndInactive project={project} />
         <DeleteProject project={project} />

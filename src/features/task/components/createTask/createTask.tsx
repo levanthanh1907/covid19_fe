@@ -124,8 +124,8 @@ const CreateTasks: React.FC = () => {
               name="type"
               render={({ field }) => (
                 <NativeSelect {...field} style={{ width: "100%" }}>
-                  <option value={0}>Công việc khi cách ly tại nhà</option>
-                  <option value={1}>Công việc khi cách ly tập trung</option>
+                  <option value={0}>Công việc cần thực hiện</option>
+                  <option value={1}>Công việc của từng đối tượng</option>
                 </NativeSelect>
               )}
               control={control}

@@ -58,15 +58,16 @@ export interface IUserRes {
 }
 
 export interface IUserNotPagging {
-  name: string;
-  isActive: boolean;
-  type: number;
-  jobTitle: string;
-  level: number;
-  userCode: string;
-  avatarPath: string;
   id: number;
+  fullName: string;
+  type: number;
+  avatarPath: string;
+  TreatmentHospital: number;
   projectType?: number;
+  address: string;
+  phoneNumber: string;
+  sex: number;
+  roleNames: string;
 }
 
 export interface IUserNotPaggingRes {

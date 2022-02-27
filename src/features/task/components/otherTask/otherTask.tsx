@@ -56,8 +56,8 @@ const OtherTask: React.FC = () => {
   }, [message, dispatch]);
   return (
     <Other>
-      <Title>Công việc khi cách ly tập trung ({otherTasks.length})</Title>
-      <TitleContent>Các công việc này phải được thêm vào các dự án theo cách thủ công</TitleContent>
+      <Title>Công việc của từng đối tượng ({otherTasks.length})</Title>
+      <TitleContent>Các công việc này phải được thêm vào các phòng bệnh bằng cách thủ công</TitleContent>
       <hr></hr>
       <TableCommon>
         <Title>Tên</Title>

@@ -3,6 +3,7 @@ import authReducer from "./reducer/authReducer";
 import projectReducer from "./reducer/projectReducer";
 import roleReducer from "./reducer/roleReducer";
 import taskReducer from "./reducer/taskReducer";
+import uploadFileReducer from "./reducer/uploadFileReducer";
 import userReducer from "./reducer/userReducer";
 
 const reducer = {
@@ -11,6 +12,7 @@ const reducer = {
   role: roleReducer,
   task: taskReducer,
   project: projectReducer,
+  uploadFile: uploadFileReducer,
 };
 
 const store = configureStore({

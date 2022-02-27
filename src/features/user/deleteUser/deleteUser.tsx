@@ -60,7 +60,7 @@ const ActionDeleteUser: React.FC<{ user: IGetAllReq }> = ({ user }) => {
   const handleClickVariant = (variant: VariantType, id: number) => () => {
     dispatch(deleteUserActions(id));
     enqueueSnackbar(
-        "Delete Role SuccessFully",
+        "Xoá thàng công",
       {
         variant,
       }
@@ -70,7 +70,7 @@ const ActionDeleteUser: React.FC<{ user: IGetAllReq }> = ({ user }) => {
     <>
       <MenuItem disableRipple onClick={handleOpen}>
         <DeleteIcon style={{color: "red"}} />
-        <p style={{ color: "red" }}>Delete</p>
+        <p style={{ color: "red" }}>Xoá</p>
       </MenuItem>
       <Modal
         open={open}
@@ -82,7 +82,7 @@ const ActionDeleteUser: React.FC<{ user: IGetAllReq }> = ({ user }) => {
             <ErrorOutlineIcon sx={{ color: "#f8bb86", fontSize: "100px" }} />
             <TextTitle>Bạn có chắc không?</TextTitle>
             <TextDescription>
-              Delete project : '{user.name}' ?
+              Xoá người dùng : '{user.name}' ?
             </TextDescription>
             <StyleButton>
               <Button

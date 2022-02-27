@@ -7,10 +7,10 @@ import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import CheckIcon from "@mui/icons-material/Check";
 import { useDispatch, useSelector } from "react-redux";
 import { SnackbarProvider, VariantType, useSnackbar } from "notistack";
-import { activeProject, getProject, inactiveProject } from "../../../../redux/actions/project";
-import { resetProgress } from "../../../../redux/reducer/projectReducer";
-import { RootState } from "../../../../redux/store";
-import { IProjectReq } from "../../../../interfaces/project/projectType";
+import { activeProject, getProject, inactiveProject } from "../../../../../redux/actions/project";
+import { resetProgress } from "../../../../../redux/reducer/projectReducer";
+import { RootState } from "../../../../../redux/store";
+import { IProjectReq } from "../../../../../interfaces/project/projectType";
 
 const style = {
   position: "absolute" as "absolute",
@@ -79,7 +79,7 @@ const ActionActive: React.FC<{ project: IProjectReq }> = ({ project }) => {
         <>
           <MenuItem disableRipple onClick={handleOpen}>
             <ClearIcon />
-            DeActive
+            Bỏ chọn
           </MenuItem>
           <Modal
             open={open}
@@ -93,7 +93,7 @@ const ActionActive: React.FC<{ project: IProjectReq }> = ({ project }) => {
                 />
                 <TextTitle>Bạn có chắc không?</TextTitle>
                 <TextDescription>
-                  DeActive project : '{project.name}' ?
+                  Bỏ chọn phòng : '{project.name}' ?
                 </TextDescription>
                 <StyleButton>
                   <Button
@@ -122,7 +122,7 @@ const ActionActive: React.FC<{ project: IProjectReq }> = ({ project }) => {
         <>
           <MenuItem disableRipple onClick={handleOpen}>
             <CheckIcon />
-            Active
+            Chọn
           </MenuItem>
           <Modal
             open={open}
@@ -136,7 +136,7 @@ const ActionActive: React.FC<{ project: IProjectReq }> = ({ project }) => {
                 />
                 <TextTitle>Bạn có chắc không?</TextTitle>
                 <TextDescription>
-                  Active project : '{project.name}' ?
+                  Chọn phòng : '{project.name}' ?
                 </TextDescription>
                 <StyleButton>
                   <Button

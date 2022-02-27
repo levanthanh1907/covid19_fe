@@ -18,6 +18,7 @@ export const getAuthenticate = createAsyncThunk(
         rememberClient,
       })),
     };
+    console.log(response)
     return response;
   }
 );

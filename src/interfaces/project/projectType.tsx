@@ -3,7 +3,7 @@ import { IError } from "../auth/authType";
 export interface IProjectReq {
   customerName: string;
   name: string;
-  code: string;
+  properties: string;
   status: number;
   pms: string[];
   activeMember: number;
@@ -28,13 +28,12 @@ export interface IProjectSearch {
 
 export interface ICreateProject {
   name: string;
-  code: string;
+  properties: string;
   status: number;
   timeStart: string;
   timeEnd: string;
   note: string;
   projectType: number;
-  customerId: number;
   tasks: {
     taskId: number;
     billable?: boolean;
@@ -69,7 +68,7 @@ export interface IDeleteProjectRes {
 
 export interface IEditProject {
   name: string;
-  code: string;
+  properties: string;
   status: number;
   timeStart: string;
   timeEnd: string;
