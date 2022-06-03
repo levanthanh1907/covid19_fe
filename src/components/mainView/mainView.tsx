@@ -10,6 +10,7 @@ import Roles from "../../features/role/role";
 import Tasks from "../../features/task/task";
 import Projects from "../../features/project/project";
 import Lookup from "../../features/lookup/lookup";
+import Chart from "../../features/chart/chart";
 import Home from "../../features/home/home";
 // import Tracker from "../../tracker/Tracker";
 
@@ -31,7 +32,7 @@ const Content = styled.div`
 `;
 
 interface data {
-  Country: string
+  Country: string;
 }
 
 const MainView: React.FC = () => {
@@ -45,7 +46,7 @@ const MainView: React.FC = () => {
   //       console.log(response);
   //       const { data } = response;
   //           console.log(data);
-      
+
   //           const countries:any[] = sortBy(data, "Country");
   //           setCountries(countries);
   //           // setSelectedCountryId("vn")
@@ -65,11 +66,7 @@ const MainView: React.FC = () => {
             path={`${path}/main/task`}
             component={Tasks}
           />
-          <PrivateRoute
-            exact={false}
-            path={`${path}/home`}
-            component={Home}
-          />
+          <PrivateRoute exact={false} path={`${path}/home`} component={Home} />
           <PrivateRoute
             exact={false}
             path={`${path}/main/user`}
@@ -89,6 +86,11 @@ const MainView: React.FC = () => {
             exact={false}
             path={`${path}/main/search`}
             component={Lookup}
+          />
+          <PrivateRoute
+            exact={false}
+            path={`${path}/main/chart`}
+            component={Chart}
           />
         </Switch>
       </Content>

@@ -3,8 +3,10 @@ import { IAuthState } from "../../interfaces/auth/authType";
 import {
   removeAccessToken,
   setAccessToken,
+  setRole,
 } from "../../utils/localStorageService";
 import { getAuthenticate } from "../actions/auth";
+import jwt from "jwt-decode";
 
 const initialState: IAuthState = {
   progress: "",
@@ -36,6 +38,8 @@ const authSlice = createSlice({
       state.progress = "done";
       if (action.payload.success === true) {
         setAccessToken(action.payload.result.accessToken);
+        const decode = jwt(action.payload.result.accessToken) as any;
+        setRole(decode.role[0]);
         state.user.accessToken = action.payload.result.accessToken;
       } else {
         state.error.message = action.payload.error.message;

@@ -1,8 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import getAuthenticateApi from "../../api/auth";
-import {
-  IFormLoginRequest,
-} from "../../interfaces/auth/authType";
+import { IFormLoginRequest } from "../../interfaces/auth/authType";
 
 export const getAuthenticate = createAsyncThunk(
   "TokenAuth/Authenticate",
@@ -18,7 +16,6 @@ export const getAuthenticate = createAsyncThunk(
         rememberClient,
       })),
     };
-    console.log(response)
     return response;
   }
 );

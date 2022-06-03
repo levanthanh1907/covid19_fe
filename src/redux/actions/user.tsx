@@ -1,5 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { createUserApi, deleteUserApi, getAll, updateUserApi} from "../../api/user";
+import {
+  createUserApi,
+  deleteUserApi,
+  getAll,
+  updateUserApi,
+} from "../../api/user";
 import { ICreateUserReq, IUserReq } from "../../interfaces/user/userType";
 
 export const getAllActions = createAsyncThunk("/User/GetAll", async () => {
@@ -21,6 +26,8 @@ export const createUserActions = createAsyncThunk(
     id,
     userName,
     password,
+    timeStart,
+    timeEnd,
     emailAddress,
     name,
     surname,
@@ -35,6 +42,8 @@ export const createUserActions = createAsyncThunk(
       id,
       userName,
       password,
+      timeStart,
+      timeEnd,
       emailAddress,
       name,
       surname,
@@ -54,6 +63,8 @@ export const updateUserActions = createAsyncThunk(
     id,
     userName,
     password,
+    timeStart,
+    timeEnd,
     emailAddress,
     name,
     surname,
@@ -68,6 +79,8 @@ export const updateUserActions = createAsyncThunk(
       id,
       userName,
       password,
+      timeStart,
+      timeEnd,
       emailAddress,
       name,
       surname,

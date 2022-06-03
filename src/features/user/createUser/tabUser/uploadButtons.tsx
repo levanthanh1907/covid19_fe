@@ -45,11 +45,7 @@ const InputFile = styled.input`
     transition: outline-offset 0.15s ease-in-out, background-color 0.15s linear;
     border: 1px solid #92b0b3;
   }
-  
 `;
-
-
-
 
 export default function UploadButtons() {
   const dispatch = useDispatch();
@@ -58,7 +54,6 @@ export default function UploadButtons() {
     const fileList = e.target.files;
     setFileSelected(fileList);
   };
-  console.log(fileSelected);
 
   // const handleUploadFile = () => {
   //   if (fileSelected) {
@@ -71,12 +66,12 @@ export default function UploadButtons() {
 
   return (
     <BoxInputFile>
-        <InputFile
-          accept="image/*"
-          key={""}
-          type="file"
-          onChange={handleAvatarChange}
-        />
-      </BoxInputFile>
+      <InputFile
+        accept="image/*"
+        key={""}
+        type="file"
+        onChange={handleAvatarChange}
+      />
+    </BoxInputFile>
   );
 }

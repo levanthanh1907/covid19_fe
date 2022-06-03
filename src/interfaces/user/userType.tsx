@@ -2,6 +2,8 @@ export interface IGetAllReq {
   id: number;
   userName: string;
   password: string;
+  timeEnd: string;
+  timeStart: string;
   emailAddress: string;
   name: string;
   surname: string;
@@ -22,6 +24,8 @@ export interface ICreateUserReq {
   id?: number;
   userName: string;
   password: string;
+  timeEnd: string;
+  timeStart: string;
   emailAddress: string;
   name: string;
   surname: string;
@@ -41,6 +45,8 @@ export interface IUserReq {
   id: number;
   userName: string;
   password: string;
+  timeEnd: string;
+  timeStart: string;
   emailAddress: string;
   name: string;
   surname: string;

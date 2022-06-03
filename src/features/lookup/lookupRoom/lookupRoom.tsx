@@ -16,7 +16,7 @@ const SearchContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 30px;
+  gap: 115px;
 `;
 
 const Tittle = styled.div`
@@ -30,7 +30,6 @@ export default function SearchRoom() {
   const rooms = useSelector((state: RootState) => state.project.rooms);
   const onKeyUp = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
-      console.log(inputText);
       dispatch(getLookUpRoom(inputText));
     }
   };
@@ -60,9 +59,7 @@ export default function SearchRoom() {
           onKeyUp={(e) => onKeyUp(e)}
         />
       </SearchContainer>
-      <SearchSelect>
-        
-      </SearchSelect>
+      <SearchSelect></SearchSelect>
     </Wrapper>
   );
 }

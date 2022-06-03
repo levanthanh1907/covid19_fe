@@ -29,7 +29,6 @@ interface useForm {
 const TabRole: React.FC<useForm> = ({ register, setValue }) => {
   const roles = useSelector((state: RootState) => state.user.roles);
   const [check, setCheck] = React.useState<boolean>(false);
- console.log(roles)
   return (
     <NewTask>
       <FormCreate>

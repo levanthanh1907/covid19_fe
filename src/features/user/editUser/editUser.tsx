@@ -73,6 +73,8 @@ export interface IUpdateUser {
   id: number;
   userName: string;
   password: string;
+  timeEnd: string;
+  timeStart: string;
   emailAddress: string;
   name: string;
   surname: string;
@@ -93,6 +95,8 @@ const EditUser: React.FC<{ user: IGetAllReq }> = ({ user }) => {
       id: user.id,
       userName: user.userName,
       password: user.password,
+      timeStart: user.timeStart,
+      timeEnd: user.timeEnd,
       emailAddress: user.emailAddress,
       name: user.name,
       surname: user.surname,
@@ -120,6 +124,8 @@ const EditUser: React.FC<{ user: IGetAllReq }> = ({ user }) => {
         id: props.id,
         userName: props.userName,
         password: props.password,
+        timeStart: props.timeStart,
+        timeEnd: props.timeEnd,
         emailAddress: props.emailAddress,
         name: props.name,
         surname: props.surname,

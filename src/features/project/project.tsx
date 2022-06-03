@@ -29,7 +29,7 @@ const TitleHeader = styled.div`
 
 const AddContent = styled.div`
   display: flex;
- 
+
   justify-content: space-between;
   padding: 15px;
   align-items: center;
@@ -76,7 +76,7 @@ const Projects: React.FC = () => {
       <hr />
       <AddContent>
         <CreateProjects />
-        <FormControl sx={{ width: "230px", left: "50px" }}>
+        <FormControl sx={{ width: "230px" }}>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"

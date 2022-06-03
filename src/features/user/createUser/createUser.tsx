@@ -101,6 +101,8 @@ function a11yProps(index: number) {
 export interface INewUser {
   userName: string;
   password: string;
+  timeEnd: string;
+  timeStart: string;
   emailAddress: string;
   name: string;
   surname: string;
@@ -140,6 +142,8 @@ const CreateUser: React.FC = () => {
       createUserActions({
         userName: props.userName,
         password: props.password,
+        timeStart: props.timeStart,
+        timeEnd: props.timeEnd,
         emailAddress: props.emailAddress,
         name: props.name,
         surname: props.surname,

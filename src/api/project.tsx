@@ -90,7 +90,9 @@ export const getUserNotPaggingApi = async () => {
   return res;
 };
 
-export const getLookUpRoomApi = async (name_room : string) => {
-  const res = await getApi<IUserNotPaggingRes>(`/Project/getUserByProject/${name_room}`);
+export const getLookUpRoomApi = async (name_room: string) => {
+  const res = await getApi<IUserNotPaggingRes>(
+    `/Project/getUserByProject/${name_room}`
+  );
   return res;
 };

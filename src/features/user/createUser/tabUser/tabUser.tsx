@@ -26,6 +26,28 @@ const FormRight = styled.div`
   width: 45%;
 `;
 
+const TimeQuarantine = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  height: 44px;
+`;
+
+const TextField1 = styled(TextField)`
+  #mui-1 {
+    padding: 10px;
+  }
+  #mui-2 {
+    padding: 10px;
+  }
+  #mui-3 {
+    padding: 10px;
+  }
+  #mui-4 {
+    padding: 10px;
+  }
+`;
+
 interface useForm {
   register: UseFormRegister<INewUser>;
   setValue: UseFormSetValue<INewUser>;
@@ -97,7 +119,20 @@ const TabUser: React.FC<useForm> = ({ register, setValue }) => {
               "& input": { padding: "10px" },
             }} */}
           {/* ></TextField> */}
-          <UploadButtons/>
+          <TimeQuarantine>
+            <TextField1
+              style={{ width: "44%" }}
+              type="date"
+              {...register("timeStart")}
+            />
+            <p style={{ padding: "0 5px" }}>to</p>
+            <TextField1
+              style={{ width: "44%" }}
+              type="date"
+              {...register("timeEnd")}
+            />
+          </TimeQuarantine>
+          <UploadButtons />
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
@@ -129,25 +164,9 @@ const TabUser: React.FC<useForm> = ({ register, setValue }) => {
             <MenuItem value={15}>Bệnh viện Phổi Trung ương</MenuItem>
             <MenuItem value={16}>Bệnh viện Tâm thần Trung ương 1</MenuItem>
           </Select>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={sex}
-            {...register("sex", { required: true })}
-            onChange={handleChangeSex}
-            sx={{
-              border: "1px solid rgba(0,0,0,.12)",
-              width: "100%",
-              marginBottom: "20px",
-              "& div": { padding: "8px 0" },
-            }}
-          >
-            <MenuItem value={0}>Nam</MenuItem>
-            <MenuItem value={1}>Nữ</MenuItem>
-          </Select>
         </FormLeft>
         <FormRight>
-        <TextField
+          <TextField
             hiddenLabel
             id="standard-basic"
             variant="standard"
@@ -186,7 +205,7 @@ const TabUser: React.FC<useForm> = ({ register, setValue }) => {
               "& input": { padding: "10px" },
             }}
           />
-          <TextField
+          {/* <TextField
             hiddenLabel
             id="standard-basic"
             placeholder="Mời nhập lại password"
@@ -196,6 +215,19 @@ const TabUser: React.FC<useForm> = ({ register, setValue }) => {
               border: "1px solid rgba(0,0,0,.12)",
               marginBottom: "20px",
               padding: "10px 0 0",
+            }}
+          /> */}
+          <TextField
+            hiddenLabel
+            id="standard-basic"
+            variant="standard"
+            placeholder="Mời nhập lại password"
+            // {...register("password", { required: true })}
+            sx={{
+              border: "1px solid rgba(0,0,0,.12)",
+              width: "100%",
+              marginBottom: "20px",
+              "& input": { padding: "10px" },
             }}
           />
           <TextField
@@ -211,6 +243,22 @@ const TabUser: React.FC<useForm> = ({ register, setValue }) => {
               "& input": { padding: "10px" },
             }}
           />
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={sex}
+            {...register("sex", { required: true })}
+            onChange={handleChangeSex}
+            sx={{
+              border: "1px solid rgba(0,0,0,.12)",
+              width: "100%",
+              marginBottom: "20px",
+              "& div": { padding: "8px 0" },
+            }}
+          >
+            <MenuItem value={0}>Nam</MenuItem>
+            <MenuItem value={1}>Nữ</MenuItem>
+          </Select>
         </FormRight>
       </FormCreate>
     </NewTask>

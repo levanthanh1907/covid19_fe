@@ -20,8 +20,10 @@ import GroupIcon from "@mui/icons-material/Group";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import logo from "../../asset/img/doctor.jpg";
 import { useDispatch } from "react-redux";
-import { removeAccessToken } from "../../utils/localStorageService";
-import ManageSearchIcon from '@mui/icons-material/ManageSearch';
+import { getRole, removeAccessToken } from "../../utils/localStorageService";
+import ManageSearchIcon from "@mui/icons-material/ManageSearch";
+import SsidChartIcon from "@mui/icons-material/SsidChart";
+import WaterfallChartIcon from "@mui/icons-material/WaterfallChart";
 
 const SidebarContainer = styled.div`
   width: 350px;
@@ -124,6 +126,8 @@ const SideBar = () => {
     history.push("/account/login");
   };
 
+  const role = getRole();
+
   const dispatch = useDispatch();
   return (
     <SidebarContainer>
@@ -144,82 +148,129 @@ const SideBar = () => {
           {btn ? (
             <ButtonLogout onClick={handleclickLogout}>
               <LogoutIcon />
-              Logout
+              Đăng xuất
             </ButtonLogout>
           ) : null}
         </Logout>
       </User>
-      <List
-        sx={{ width: "100%", bgcolor: "background.paper" }}
-        component="nav"
-        aria-labelledby="nested-list-subheader"
-        subheader={
-          <ListSubheader
-            component="div"
-            id="nested-list-subheader"
-          ></ListSubheader>
-        }
-      >
-        <StyleLink to="/app/home">
-          <ListItemButton>
+      {role === "Quản trị viên" ? (
+        <List
+          sx={{ width: "100%", bgcolor: "background.paper" }}
+          component="nav"
+          aria-labelledby="nested-list-subheader"
+          subheader={
+            <ListSubheader
+              component="div"
+              id="nested-list-subheader"
+            ></ListSubheader>
+          }
+        >
+          <StyleLink to="/app/home">
+            <ListItemButton>
+              <ListItemIcon>
+                <HomeIcon />
+              </ListItemIcon>
+              <ListItemText primary="Trang chủ" />
+            </ListItemButton>
+          </StyleLink>
+          <ListItemButton onClick={handleClick}>
             <ListItemIcon>
-              <HomeIcon />
+              <GroupWorkIcon />
             </ListItemIcon>
-            <ListItemText primary="Trang chủ" />
+            <ListItemText primary="Người quản trị" />
+            {open ? <AddIcon /> : <AddIcon />}
           </ListItemButton>
-        </StyleLink>
-        <ListItemButton onClick={handleClick}>
-          <ListItemIcon>
-            <GroupWorkIcon />
-          </ListItemIcon>
-          <ListItemText primary="Người quản trị" />
-          {open ? <AddIcon /> : <AddIcon />}
-        </ListItemButton>
-        <Collapse in={open} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <StyleLink to="/app/main/user">
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemIcon>
-                  <GroupIcon />
-                </ListItemIcon>
-                <ListItemText primary="Người dùng" />
-              </ListItemButton>
-            </StyleLink>
-            <StyleLink to="/app/main/role">
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemIcon>
-                  <LocalOfferIcon />
-                </ListItemIcon>
-                <ListItemText primary="Vai trò" />
-              </ListItemButton>
-            </StyleLink>
-          </List>
-        </Collapse>
-        <StyleLink to="/app/main/task">
-          <ListItemButton>
-            <ListItemIcon>
-              <ImportContactsIcon />
-            </ListItemIcon>
-            <ListItemText primary="Hướng điều trị" />
-          </ListItemButton>
-        </StyleLink>
-        <StyleLink to="/app/main/project">
-          <ListItemButton>
-            <ListItemIcon>
-              <AssessmentIcon />
-            </ListItemIcon>
-            <ListItemText primary="Phòng điều trị" />
-          </ListItemButton>
-        </StyleLink>
-        <StyleLink to="/app/main/search">
-          <ListItemButton>
-            <ListItemIcon>
-              <ManageSearchIcon />
-            </ListItemIcon>
-            <ListItemText primary="Tra cứu thông tin" />
-          </ListItemButton>
-        </StyleLink>
-      </List>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              <StyleLink to="/app/main/user">
+                <ListItemButton sx={{ pl: 4 }}>
+                  <ListItemIcon>
+                    <GroupIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Người dùng" />
+                </ListItemButton>
+              </StyleLink>
+              <StyleLink to="/app/main/role">
+                <ListItemButton sx={{ pl: 4 }}>
+                  <ListItemIcon>
+                    <LocalOfferIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Vai trò" />
+                </ListItemButton>
+              </StyleLink>
+            </List>
+          </Collapse>
+          <StyleLink to="/app/main/task">
+            <ListItemButton>
+              <ListItemIcon>
+                <ImportContactsIcon />
+              </ListItemIcon>
+              <ListItemText primary="Hướng điều trị" />
+            </ListItemButton>
+          </StyleLink>
+          <StyleLink to="/app/main/project">
+            <ListItemButton>
+              <ListItemIcon>
+                <AssessmentIcon />
+              </ListItemIcon>
+              <ListItemText primary="Phòng điều trị" />
+            </ListItemButton>
+          </StyleLink>
+          <StyleLink to="/app/main/search">
+            <ListItemButton>
+              <ListItemIcon>
+                <ManageSearchIcon />
+              </ListItemIcon>
+              <ListItemText primary="Tra cứu thông tin" />
+            </ListItemButton>
+          </StyleLink>
+          <StyleLink to="/app/main/chart">
+            <ListItemButton>
+              <ListItemIcon>
+                <SsidChartIcon />
+              </ListItemIcon>
+              <ListItemText primary="Biểu đồ" />
+            </ListItemButton>
+          </StyleLink>
+        </List>
+      ) : (
+        <List
+          sx={{ width: "100%", bgcolor: "background.paper" }}
+          component="nav"
+          aria-labelledby="nested-list-subheader"
+          subheader={
+            <ListSubheader
+              component="div"
+              id="nested-list-subheader"
+            ></ListSubheader>
+          }
+        >
+          <StyleLink to="/app/home">
+            <ListItemButton>
+              <ListItemIcon>
+                <HomeIcon />
+              </ListItemIcon>
+              <ListItemText primary="Trang chủ" />
+            </ListItemButton>
+          </StyleLink>
+          <StyleLink to="/app/main/search">
+            <ListItemButton>
+              <ListItemIcon>
+                <ManageSearchIcon />
+              </ListItemIcon>
+              <ListItemText primary="Tra cứu thông tin" />
+            </ListItemButton>
+          </StyleLink>
+          <StyleLink to="/app/main/chart">
+            <ListItemButton>
+              <ListItemIcon>
+                <SsidChartIcon />
+              </ListItemIcon>
+              <ListItemText primary="Biểu đồ" />
+            </ListItemButton>
+          </StyleLink>
+        </List>
+      )}
       <FooterSideBar>
         <TitleFooter>
           @2021 <span style={{ color: "red" }}>Covid19</span>

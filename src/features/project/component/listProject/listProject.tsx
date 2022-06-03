@@ -82,106 +82,103 @@ const ItemName = styled.div``;
 export const formatDay = (day: string) => dayjs(day).format("DD/MM/YYYY");
 const ListProjects: React.FC = () => {
   const projects = useSelector((state: RootState) => state.project.projects);
-  
+
   return (
     <ContentTable>
-          <Table
-            aria-label="simple table"
-            sx={{
-              border: 1,
-              color: "#e9e9e9",
-            }}
-          >
-            <TableHead>
-              <TableRow>
+      <Table
+        aria-label="simple table"
+        sx={{
+          border: 1,
+          color: "#e9e9e9",
+        }}
+      >
+        <TableHead>
+          <TableRow>
+            <TableCell
+              colSpan={3}
+              sx={{
+                width: "100%",
+                background: "#d3d3d3",
+                padding: "10px",
+                fontWeight: "bold",
+                fontSize: "20px",
+              }}
+            ></TableCell>
+          </TableRow>
+        </TableHead>
+        {projects.map((item) => {
+          return (
+            <TableBody>
+              <TableRow
+                sx={{
+                  "&:last-child td, &:last-child th": {
+                    border: 0,
+                  },
+                }}
+              >
                 <TableCell
-                  colSpan={3}
+                  scope="row"
                   sx={{
                     width: "100%",
-                    background: "#d3d3d3",
-                    padding: "10px",
-                    fontWeight: "bold",
-                    fontSize: "20px",
+                    padding: "5px 5px",
+                    display: "flex",
+                    gap: "10px",
+                    alignItems: "center",
+                    marginTop: "10px",
                   }}
                 >
+                  <ItemName>{item.name}</ItemName>
+                  <ListItemOne>{item.pms}</ListItemOne>
+                  <ListItemTwo>{item.activeMember} thành viên</ListItemTwo>
+                  {item.projectType == 0 ? (
+                    <ListItemThree>Có hỗ trợ</ListItemThree>
+                  ) : (
+                    <ListItemThree>Không được hỗ trợ</ListItemThree>
+                  )}
+                  {item.timeEnd ? (
+                    <ListItemfour>
+                      {`${formatDay(item.timeStart)}-${formatDay(
+                        item.timeEnd
+                      )}`}
+                    </ListItemfour>
+                  ) : (
+                    <ListItemfour>
+                      {`${formatDay(item.timeStart)}
+                          `}
+                    </ListItemfour>
+                  )}
+                </TableCell>
+                <TableCell
+                  align="right"
+                  sx={{ width: "5px", padding: "5px 5px" }}
+                >
+                  <Snackbar
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "right",
+                    }}
+                    autoHideDuration={2000}
+                  >
+                    <Alert variant="filled" severity="error"></Alert>
+                  </Snackbar>
+                  <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                    {item.status === 1 ? (
+                      <StyleInactive>
+                        <p>Không hoạt động</p>
+                      </StyleInactive>
+                    ) : (
+                      <StyleActive>
+                        <p>Chọn</p>
+                      </StyleActive>
+                    )}
+                    <Actions project={item} />
+                  </div>
                 </TableCell>
               </TableRow>
-            </TableHead>
-            {projects
-              .map((item) => {
-                return (
-                  <TableBody>
-                    <TableRow
-                      sx={{
-                        "&:last-child td, &:last-child th": {
-                          border: 0,
-                        },
-                      }}
-                    >
-                      <TableCell
-                        scope="row"
-                        sx={{
-                          width: "100%",
-                          padding: "5px 5px",
-                          display: "flex",
-                          gap: "10px",
-                          alignItems: "center",
-                          marginTop: "10px",
-                        }}
-                      >
-                        <ItemName>{item.name}</ItemName>
-                        <ListItemOne>{item.pms}</ListItemOne>
-                        <ListItemTwo>{item.activeMember} bệnh nhân</ListItemTwo>
-                        {item.projectType == 0 ? (
-                          <ListItemThree>Có hỗ trợ</ListItemThree>
-                        ) : (
-                          <ListItemThree>Không được hỗ trợ</ListItemThree>
-                        )}
-                        {item.timeEnd ? (
-                          <ListItemfour>
-                            {`${formatDay(item.timeStart)}-${formatDay(
-                              item.timeEnd
-                            )}`}
-                          </ListItemfour>
-                        ) : (
-                          <ListItemfour>
-                            {`${formatDay(item.timeStart)}
-                          `}
-                          </ListItemfour>
-                        )}
-                      </TableCell>
-                      <TableCell
-                        align="right"
-                        sx={{ width: "5px", padding: "5px 5px" }}
-                      >
-                        <Snackbar
-                          anchorOrigin={{
-                            vertical: "bottom",
-                            horizontal: "right",
-                          }}
-                          autoHideDuration={2000}
-                        >
-                          <Alert variant="filled" severity="error"></Alert>
-                        </Snackbar>
-                        <div style={{display: "flex", justifyContent: "flex-end"}}>
-                        {item.status === 1 ? (
-                          <StyleInactive>
-                            <p>Không hoạt động</p>
-                          </StyleInactive>
-                        ) : (
-                          <StyleActive>
-                            <p>Chọn</p>
-                          </StyleActive>
-                        )}
-                        <Actions project={item} />
-                        </div>
-                      </TableCell>
-                      
-                    </TableRow>
-                  </TableBody>
-                );
-              })}
-          </Table>
+            </TableBody>
+          );
+        })}
+      </Table>
     </ContentTable>
   );
 };

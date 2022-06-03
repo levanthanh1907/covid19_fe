@@ -274,7 +274,6 @@ const projectSlice = createSlice({
         state.progress = "done";
         state.rooms = action.payload.result;
         state.roomId = action.payload.name_room;
-        console.log(action.payload.name_room);
       })
       .addCase(getLookUpRoom.rejected, (state) => {
         state.progress = "error";
@@ -293,7 +292,6 @@ const getAllProjectStatus0 = createSelector(getAllProjectSelector, (projects) =>
 const getAllProjectStatus1 = createSelector(getAllProjectSelector, (projects) =>
   projects.filter((projects) => projects.status === 1)
 );
-console.log(getAllProjectStatus0);
 
 export const projectSelector = {
   getAllProjectSelector,

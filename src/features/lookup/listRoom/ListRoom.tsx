@@ -30,6 +30,15 @@ const Common = styled.div`
 
 const TableCommon = styled.div``;
 
+const Notification = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+const TextNoti = styled.div`
+  font-size: 20px;
+  color: red;
+`;
+
 export default function ListRoom() {
   //   const dispatch = useDispatch();
   //   const progress = useSelector((state: RootState) => state.role.progress);
@@ -43,6 +52,38 @@ export default function ListRoom() {
   const rooms = useSelector((state: RootState) => state.project.rooms);
   const roomid = useSelector((state: RootState) => state.project.roomId);
 
+  const renderTabPannel = () => {
+    if (rooms !== undefined) {
+      return rooms.map((item, index) => {
+        return (
+          <TableRow
+            //   key={index}
+            sx={{
+              "& td": { border: "1px solid #ccc" },
+            }}
+            key={index}
+          >
+            <TableCell scope="row">{index + 1}</TableCell>
+            <TableCell scope="row">{item.fullName}</TableCell>
+            <TableCell scope="row">{item.address}</TableCell>
+            <TableCell scope="row">{item.phoneNumber}</TableCell>
+            {item.sex == 0 ? (
+              <TableCell scope="row">Nam</TableCell>
+            ) : (
+              <TableCell scope="row">Nữ</TableCell>
+            )}
+            <TableCell scope="row">{item.roleNames}</TableCell>
+          </TableRow>
+        );
+      });
+    } else {
+      return (
+        <Notification>
+          <TextNoti>Phòng không được tìm thấy</TextNoti>
+        </Notification>
+      );
+    }
+  };
   return (
     <Common>
       <Title>Danh sách ({roomid})</Title>
@@ -64,32 +105,7 @@ export default function ListRoom() {
               <TableCell scope="row">Vai trò</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
-            {rooms.map((item, index) => (
-              <TableRow
-                //   key={index}
-                sx={{
-                  "& td": { border: "1px solid #ccc" },
-                }}
-                key={index}
-              >
-                <TableCell scope="row">{index + 1}</TableCell>
-                <TableCell scope="row">{item.fullName}</TableCell>
-                <TableCell scope="row">{item.address}</TableCell>
-                <TableCell scope="row">{item.phoneNumber}</TableCell>
-                {item.sex == 0 ? (
-                  <TableCell scope="row">Nam</TableCell>
-                ) : (
-                  <TableCell scope="row">Nữ</TableCell>
-                )}
-                <TableCell scope="row">{item.roleNames}</TableCell>
-              </TableRow>
-            ))}
-            {/* {roles.map((item, index) => { */}
-            {/* return ( */}
-            {/* );
-            })} */}
-          </TableBody>
+          <TableBody>{renderTabPannel()}</TableBody>
         </Table>
       </TableCommon>
     </Common>

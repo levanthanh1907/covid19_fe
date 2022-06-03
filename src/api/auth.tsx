@@ -1,4 +1,7 @@
-import { IFormLoginRequest, IFormLoginResponse } from "../interfaces/auth/authType";
+import {
+  IFormLoginRequest,
+  IFormLoginResponse,
+} from "../interfaces/auth/authType";
 import { postApi } from "../utils/apiHelper";
 
 const getAuthenticateApi = async ({
@@ -9,9 +12,7 @@ const getAuthenticateApi = async ({
   const data = await postApi<IFormLoginRequest, IFormLoginResponse>(
     `/TokenAuth/Authenticate`,
     { userNameOrEmailAddress, password, rememberClient }
-
   );
-  // console.log(data);
   return data;
 };
 
